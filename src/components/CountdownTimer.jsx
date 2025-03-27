@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BackgroundEffects from "./BackgroundEffects";
 
 const CountdownTimer = () => {
   const targetDate = new Date("March 28, 2025 18:00:00").getTime();
-  const [timeLeft, setTimeLeft] = useState(null); // Initial state is null
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
     function calculateTimeLeft() {
@@ -21,7 +22,7 @@ const CountdownTimer = () => {
       };
     }
 
-    setTimeLeft(calculateTimeLeft()); // Set initial time after mount
+    setTimeLeft(calculateTimeLeft());
 
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
@@ -33,12 +34,18 @@ const CountdownTimer = () => {
   if (!timeLeft) return null; // Prevents mismatch during hydration
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white">
-      <h1 className="text-4xl md:text-6xl font-light tracking-wide mb-10 text-gray-300">
-        Countdown to <span className="font-semibold text-white">March 28, 2025</span>
+    <div className="relative flex flex-col items-center justify-center min-h-screen text-white overflow-hidden">
+      {/* 🔥 Animated Background */}
+      <BackgroundEffects />
+
+      {/* Title */}
+      <h1 className="text-4xl md:text-6xl text-center font-light tracking-wide mb-10 text-gray-300 relative z-10">
+        ⏳ <span className="font-semibold text-white">Internship Escape Countdown!</span> 🎓  
+        <br /> March 28, 2025 — Almost There!
       </h1>
 
-      <div className="flex space-x-8">
+      {/* Countdown Timer */}
+      <div className="flex space-x-8 relative z-10">
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div key={unit} className="flex flex-col items-center">
             <FadeNumber number={value} />
@@ -52,7 +59,7 @@ const CountdownTimer = () => {
 
 const FadeNumber = ({ number }) => {
   return (
-    <div className="relative w-44 md:w-56 h-44 md:h-56 flex items-center justify-center bg-gray-800 text-6xl md:text-8xl font-bold rounded-lg shadow-xl">
+    <div className="relative w-44 md:w-56 h-44 md:h-56 flex items-center justify-center bg-indigo-950 text-6xl md:text-8xl font-bold rounded-lg shadow-xl">
       <AnimatePresence mode="wait">
         <motion.span
           key={number}
