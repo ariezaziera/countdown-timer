@@ -31,25 +31,27 @@ const CountdownTimer = () => {
     return () => clearInterval(timer);
   }, []);
 
-  if (!timeLeft) return null; // Prevents mismatch during hydration
+  if (!timeLeft) return null;
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen text-white overflow-hidden">
-      {/* 🔥 Animated Background */}
+    <div className="relative flex flex-col items-center justify-center min-h-screen text-white overflow-hidden px-4">
+      {/* 🔥 Background Effects */}
       <BackgroundEffects />
 
-      {/* Title */}
-      <h1 className="text-4xl md:text-6xl text-center font-light tracking-wide mb-10 text-gray-300 relative z-10">
+      {/* 🏷 Title */}
+      <h1 className="text-2xl sm:text-4xl md:text-5xl text-center font-light tracking-wide mb-8 text-gray-300 relative z-10 leading-tight">
         ⏳ <span className="font-semibold text-white">Internship Escape Countdown!</span> 🎓  
-        <br /> March 28, 2025 — Almost There!
+        <br /> <span className="text-xl sm:text-2xl md:text-3xl">March 28, 2025 — Almost There!</span>
       </h1>
 
-      {/* Countdown Timer */}
-      <div className="flex space-x-8 relative z-10">
+      {/* ⏰ Countdown Timer */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 relative z-10">
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div key={unit} className="flex flex-col items-center">
             <FadeNumber number={value} />
-            <p className="text-lg md:text-xl uppercase mt-4 text-gray-400 tracking-widest">{unit}</p>
+            <p className="text-xs sm:text-sm md:text-lg uppercase mt-2 text-gray-400 tracking-widest">
+              {unit}
+            </p>
           </div>
         ))}
       </div>
@@ -59,7 +61,11 @@ const CountdownTimer = () => {
 
 const FadeNumber = ({ number }) => {
   return (
-    <div className="relative w-44 md:w-56 h-44 md:h-56 flex items-center justify-center bg-indigo-950 text-6xl md:text-8xl font-bold rounded-lg shadow-xl">
+    <div style={{
+      backgroundColor: "rgba(255, 255, 255, 0.05)", // Indigo with 30% opacity
+      backdropFilter: "blur(5px)", // Blurs the background behind the card
+    }}
+    className="relative w-20 sm:w-30 md:w-50 h-20 sm:h-30 md:h-50 flex items-center justify-center text-4xl sm:text-7xl md:text-8xl font-bold rounded-lg shadow-lg">
       <AnimatePresence mode="wait">
         <motion.span
           key={number}
