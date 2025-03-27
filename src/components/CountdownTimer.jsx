@@ -62,7 +62,7 @@ const CountdownTimer = () => {
 const FadeNumber = ({ number }) => {
   return (
     <div style={{
-      backgroundColor: "rgba(255, 255, 255, 0.05)", // Indigo with 30% opacity
+      backgroundColor: "rgba(255, 255, 255, 0.08)", // Indigo with 30% opacity
       backdropFilter: "blur(5px)", // Blurs the background behind the card
     }}
     className="relative w-20 sm:w-30 md:w-50 h-20 sm:h-30 md:h-50 flex items-center justify-center text-4xl sm:text-7xl md:text-8xl font-bold rounded-lg shadow-lg">
